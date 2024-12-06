@@ -1,5 +1,6 @@
-package ua.edu.ucu;
+package ua.edu.ucu.task3;
 
+import lombok.SneakyThrows;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -8,7 +9,8 @@ import java.net.URL;
 import java.util.Scanner;
 
 public class PDLReader {
-    public static void main(String[] args) throws IOException {
+    @SneakyThrows
+    public Company fetch(String companyName){
         String API_KEY = "";
         URL url = new URL("https://api.peopledatalabs.com/v5/company/enrich?website=ucu.edu.ua");
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -18,5 +20,6 @@ public class PDLReader {
         String text = new Scanner(connection.getInputStream()).useDelimiter("\\Z").next();
         JSONObject jsonObject = new JSONObject(text);
         System.out.println(jsonObject);
+        return new Company();
     }
 }
